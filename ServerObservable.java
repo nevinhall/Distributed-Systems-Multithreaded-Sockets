@@ -7,12 +7,13 @@ public class ServerObservable extends Observable {
 		//loop doesnt work goes too far
 		Boolean exists = true;
 		
-		while(exists == true){
+		if(exists == true){
 			System.out.println("The given Directory exists, notifying observers");
 			setChanged();
+			System.out.println("reached");
 			notifyObservers(fileDir);
 			exists = fileDir.exists() && fileDir.list().length != 1;
-			System.out.println("reached");
+			
 			
 			if(fileDir.list().length == 1){
 				exists = false;
