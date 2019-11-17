@@ -3,14 +3,15 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.Observable;
 
 public class HeroClient {
 
-	public static void main(String[] args) {
+	public static void main(String[] args)  {
 		  String host = "localhost";
 		 try {
 		        // Establish connection with the server
-		        Socket socket = new Socket(host, 8007);
+		        Socket socket = new Socket(host, 8009);
 
 		        // Create an output stream to the server
 		        DataOutputStream toServer = new DataOutputStream(socket.getOutputStream());
