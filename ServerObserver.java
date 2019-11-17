@@ -23,33 +23,30 @@ public class ServerObserver  implements Observer{
 
 
 		try {
-		
-		
-			
-			
-			//			FileInputStream fileToSend = new FileInputStream("D://college 2019//College third year//semester one//Disturbted systems//common//testSuccesful.ser"); 
-			//
-			//
-			//			System.out.println("start of update");
-			//
-			//
-			//
-			//
-			//			ObjectOutputStream toClientBattleZone = new ObjectOutputStream(socket.getOutputStream());
-			//
-			//			Object objectFound = null; 
-			//			ObjectInputStream in = new ObjectInputStream(fileToSend);
-			//			objectFound = (Object)in.readObject();
-			//			fileToSend.close();
-			//
-			//			System.out.println("object serilaised");
-			//			toClientBattleZone.writeObject(objectFound);
-			
 
-			DataOutputStream toClientBoolean = new DataOutputStream(socket.getOutputStream());
-			toClientBoolean.writeBoolean(false);
-			System.out.println("sentToclient");
+			//send boolean to client
+//			DataOutputStream toClientBoolean = new DataOutputStream(socket.getOutputStream());
+//			toClientBoolean.writeBoolean(false);
+//			System.out.println("sentToclient");
+//			toClientBoolean.close();
 
+			//picks file to use
+			FileInputStream fileToSend = new FileInputStream("D://college 2019//College third year//semester one//Disturbted systems//common//battle-zone-1.ser"); 
+			
+			//changes from file to serialised object
+			Object convertedVillan = null; 
+			ObjectInputStream villanFromFolder = new ObjectInputStream(fileToSend);
+			convertedVillan= (Object)villanFromFolder.readObject();
+			fileToSend.close();
+
+			//sends file
+			System.out.println("object sent");
+			ObjectOutputStream toClientBattleZone = new ObjectOutputStream(socket.getOutputStream());
+			toClientBattleZone.writeObject(convertedVillan);
+			System.out.println("finished sending");
+//			
+			
+			
 
 		}
 

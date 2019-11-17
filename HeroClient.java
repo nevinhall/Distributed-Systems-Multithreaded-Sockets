@@ -16,18 +16,23 @@ public class HeroClient {
 		String host = "localhost";
 		try {
 			// Establish connection with the server
-			socket = new Socket(host, 7992);
+			socket = new Socket(host, 7003);
 
 			// Create an output stream to the server
 //			DataOutputStream toServer = new DataOutputStream(socket.getOutputStream());
 //			toServer.flush();
 //			toServer.close();
 
-			DataInputStream inputFromClient = new DataInputStream(socket.getInputStream());
+			//Allows test value 
+//			DataInputStream fromServerBoolean = new DataInputStream(socket.getInputStream());
+//			Object test =  fromServerBoolean.readBoolean();
+//			System.out.println("value is" + test.toString());
+//			fromServerBoolean.close();
+			
 
 			//Create I/O to allow client to recieve villian objects
-			//ObjectOutputStream toClientBattleZone = new ObjectOutputStream(socket.getOutputStream());
-			//ObjectInputStream inputFromServer = new ObjectInputStream(socket.getInputStream());
+			ObjectInputStream villansFromServer = new ObjectInputStream(socket.getInputStream());
+			Object recievedVillain = villansFromServer.readObject();
 
 
 //			Object object = inputFromClient.readBoolean();
@@ -37,20 +42,12 @@ public class HeroClient {
 
 
 			//Recieve and deserialise objects from server
-			//Object recievedVillain =  inputFromServer.readObject();
-			//System.out.println(inputFromServer.toString());
-
-			Object test = inputFromClient.readBoolean();
-			System.out.println("value is" + test.toString());
-
-			//if(test == false) {
 				File destination = new File ("D://college 2019//College third year//semester one//Disturbted systems//common//saved-the-world-again//saved"  + 1 + ".ser");
-			//}
-//				FileOutputStream fileOut =	new FileOutputStream(destination);
-//				ObjectOutputStream out = new ObjectOutputStream(fileOut);
-//				out.writeObject(recievedVillain);
-//				out.close();
-//				fileOut.close();
+				FileOutputStream fileOut =	new FileOutputStream(destination);
+				ObjectOutputStream out = new ObjectOutputStream(fileOut);
+				out.writeObject(recievedVillain);
+				out.close();
+				fileOut.close();
 
 
 				//  
@@ -58,13 +55,13 @@ public class HeroClient {
 			catch (IOException ex) {
 				ex.printStackTrace();
 			}
-			// TODO Auto-generated method stub
-			//		 try {
-			//			socket.close();
-			//		} catch (IOException e) {
-			//			// TODO Auto-generated catch block
-			//			e.printStackTrace();
-			//		}
+		
+					 try {
+						socket.close();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 		}
 
 	}
