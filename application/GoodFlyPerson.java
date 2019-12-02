@@ -1,6 +1,4 @@
-
-
-
+package application;
 public class GoodFlyPerson extends SuperHero {
 
 	public GoodFlyPerson(int goodness) {

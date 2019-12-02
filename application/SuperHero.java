@@ -1,8 +1,9 @@
+package application;
 
 
 import java.io.Serializable;
 
-import villians.SuperThing;
+
 
 public class SuperHero implements SuperThing, Serializable {
 	int goodness;

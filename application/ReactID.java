@@ -1,14 +1,11 @@
+package application;
 
 
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
 import villians.BadFlyPerson;
 import villians.BadStrongMan;
 import villians.Person;
@@ -55,23 +52,23 @@ public class ReactID {
 	}
 
 	public void react(Object succesfulId) throws IOException{
-		String host = "localhost";
-		Socket secondsocket2 = new Socket(host, 7007);
-		//sends file
-		System.out.println("object sent");
-		ObjectOutputStream toSavedWorld = new ObjectOutputStream(secondsocket2.getOutputStream());
-		toSavedWorld.writeObject(succesfulId);
-		System.out.println("finished sending");
-		toSavedWorld.close();
-		secondsocket2.close();
-		
-		
-		
-		
-		
-
-		
-		
+//		String host = "localhost";
+//		Socket secondsocket2 = new Socket(host, 7007);
+//		//sends file
+//		System.out.println("object sent");
+//		ObjectOutputStream toSavedWorld = new ObjectOutputStream(secondsocket2.getOutputStream());
+//		toSavedWorld.writeObject(succesfulId);
+//		System.out.println("finished sending");
+//		toSavedWorld.close();
+//		secondsocket2.close();
+//		
+//		
+//		
+//		
+//		
+//
+//		
+//		
 
 	}
 

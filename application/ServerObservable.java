@@ -1,3 +1,4 @@
+package application;
 import java.io.File;
 import java.util.Observable;
 
@@ -14,7 +15,7 @@ public class ServerObservable extends Observable {
 			System.out.println("reached");
 			notifyObservers(fileDir);
 			exists = fileDir.exists() && fileDir.list().length != 1;
-
+			
 
 			if(fileDir.list().length == 1){
 				exists = false;

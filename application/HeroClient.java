@@ -1,7 +1,5 @@
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+package application;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.Socket;
 
 public class HeroClient {

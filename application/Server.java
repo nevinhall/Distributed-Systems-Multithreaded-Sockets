@@ -1,5 +1,10 @@
-import java.io.*;
-import java.net.*;
+package application;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 public class Server {
 
@@ -17,7 +22,7 @@ public class Server {
 		// Create a server socket
 
 		try {
-			serverSocket = new ServerSocket(8001);
+			serverSocket = new ServerSocket(8002);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
