@@ -24,7 +24,7 @@ public class Server {
 		// Create a server socket
 
 		try {
-			serverSocket = new ServerSocket(8007);
+			serverSocket = new ServerSocket(7001);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,13 +55,14 @@ public class Server {
 
 		System.out.println("shouldbe delted by now");
 
-		
+
 		readyVillains = arrayOfVillians.getFoundVillains();
-		//		
-		//		ObjectOutputStream sendvillain= new ObjectOutputStream(socket.getOutputStream()); 
-		//		sendvillain.writeObject(readyVillains);
-		//		System.out.println("Sent Villains");
-		//		
+		System.out.println("The villain array size should equal num villains it is, " + readyVillains.size());
+
+		ObjectOutputStream sendvillain= new ObjectOutputStream(socket.getOutputStream()); 
+		sendvillain.writeObject(readyVillains);
+		System.out.println("Sent Villains");
+
 
 		socket.close();
 
@@ -72,6 +73,8 @@ public class Server {
 			try {
 				socketinner = serverSocket.accept();
 				System.out.println("New connection made");
+
+
 
 				//				ObjectOutputStream sendvillain= new ObjectOutputStream(socketinner.getOutputStream()); 
 				//				sendvillain.writeObject(readyVillains);
