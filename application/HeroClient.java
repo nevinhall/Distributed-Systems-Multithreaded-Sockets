@@ -14,13 +14,13 @@ public class HeroClient {
 		Socket socket = null;
 		try {
 			// Establish connection with the server
-			socket = new Socket(host, 7001);
+			socket = new Socket(host, 7002);
 
 			ObjectInputStream recievedVillains = new ObjectInputStream(socket.getInputStream());
 
 			recievedreadyVillains = (ArrayList<Object>) recievedVillains.readObject();
 			System.out.println(recievedreadyVillains.get(0));
-			socket.close();
+			//socket.close();
 
 		}
 		catch (IOException ex) {
@@ -33,7 +33,9 @@ public class HeroClient {
 		socketThreads = new Socket(host, 7001);
 		
 		for(int i = 0; i < recievedreadyVillains.size(); i++ ){
-			new sendHeroesThread(socketThreads);
+			Object villain = recievedreadyVillains.get(i);
+			new sendHeroesThread(socketThreads,villain).start();
+			
 		}
 		
 

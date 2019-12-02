@@ -24,7 +24,7 @@ public class Server {
 		// Create a server socket
 
 		try {
-			serverSocket = new ServerSocket(7001);
+			serverSocket = new ServerSocket(7003);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -74,11 +74,10 @@ public class Server {
 				socketinner = serverSocket.accept();
 				System.out.println("New connection made");
 
-
-
-				//				ObjectOutputStream sendvillain= new ObjectOutputStream(socketinner.getOutputStream()); 
-				//				sendvillain.writeObject(readyVillains);
-				//				
+					ObjectOutputStream recievedHero = new ObjectOutputStream(socketinner.getOutputStream()); 
+					
+					
+							
 
 
 
