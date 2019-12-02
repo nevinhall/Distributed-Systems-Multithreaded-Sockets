@@ -3,16 +3,18 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Server {
 
 	private DataInputStream inputFromClient;
-	
+
 	public static void main(String[] args) throws ClassNotFoundException, IOException {
 		new Server();
-		
+
 	}
 
 	public Server() throws ClassNotFoundException, IOException {
@@ -22,7 +24,7 @@ public class Server {
 		// Create a server socket
 
 		try {
-			serverSocket = new ServerSocket(8002);
+			serverSocket = new ServerSocket(8007);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -37,22 +39,43 @@ public class Server {
 		File temp = new File("D://college 2019//College third year//semester one//Disturbted systems//common//");
 		ServerObservable checkForVillians =  new ServerObservable();
 		ServerObserver retriveVillians = new ServerObserver();
+		serverClientArrayList arrayOfVillians =  new serverClientArrayList();
+		ArrayList<Object> readyVillains;
+
+
+		Socket socket = null;
+		socket = serverSocket.accept();
+
 		retriveVillians.setTemp(temp);
+		retriveVillians.setSendVillains(arrayOfVillians);
 
 
 		checkForVillians.addObserver(retriveVillians);
 		checkForVillians.tempFile(temp);
 
+		System.out.println("shouldbe delted by now");
+
+		
+		readyVillains = arrayOfVillians.getFoundVillains();
+		//		
+		//		ObjectOutputStream sendvillain= new ObjectOutputStream(socket.getOutputStream()); 
+		//		sendvillain.writeObject(readyVillains);
+		//		System.out.println("Sent Villains");
+		//		
+
+		socket.close();
+
 		//loop to keep checking for clients wanting to join
 		while(true) {
-			Socket socket = null;
+			Socket socketinner = null;
 
 			try {
-				socket = serverSocket.accept();
+				socketinner = serverSocket.accept();
 				System.out.println("New connection made");
-				
-				DataOutputStream sendvillain= new DataOutputStream(socket.getOutputStream()); 
 
+				//				ObjectOutputStream sendvillain= new ObjectOutputStream(socketinner.getOutputStream()); 
+				//				sendvillain.writeObject(readyVillains);
+				//				
 
 
 
@@ -63,7 +86,7 @@ public class Server {
 				socket.close();
 				serverSocket.close();
 				e.printStackTrace();
-				
+
 			}
 		}
 	}
