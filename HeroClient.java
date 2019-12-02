@@ -6,6 +6,7 @@ import java.net.Socket;
 
 public class HeroClient {
 
+<<<<<<< Updated upstream
 	public static void main(String[] args) {
 		  String host = "localhost";
 		 try {
@@ -28,6 +29,37 @@ public class HeroClient {
 		        ex.printStackTrace();
 		      }
 		// TODO Auto-generated method stub
+=======
+	public static void main(String[] args) throws ClassNotFoundException  {
+		String host = "localhost";
+		try {
+			// Establish connection with the server
+			socket = new Socket(host, 8001);
+
+
+			//Allows test value 
+//			DataInputStream fromServerBoolean = new DataInputStream(socket.getInputStream());
+//			Object test =  fromServerBoolean.readBoolean();
+//			System.out.println("value is" + test.toString());
+//			fromServerBoolean.close();
+			
+
+			
+			while (true) {
+				// Establish connection with the server
+				new ServerHandler(socket).start();;
+			}
+		
+
+
+			}
+			catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		
+					 
+		}
+>>>>>>> Stashed changes
 
 	}
 
