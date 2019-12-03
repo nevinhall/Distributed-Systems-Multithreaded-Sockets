@@ -25,7 +25,7 @@ public class Server {
 		// Create a server socket
 
 		try {
-			serverSocket = new ServerSocket(7006);
+			serverSocket = new ServerSocket(8003);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,36 +63,32 @@ public class Server {
 		ObjectOutputStream sendvillain= new ObjectOutputStream(socket.getOutputStream()); 
 		sendvillain.writeObject(readyVillains);
 		System.out.println("Sent Villains");
+		sendvillain.reset();
+		//sendvillain.close();
+
 
 
 		//socket.close();
+		
 
 		//loop to keep checking for clients wanting to join
+		int i = 1;
 		while(true) {
-			Socket socketinner = null;
+		//	socket = serverSocket.accept();
+			System.out.println("Reconncted client No: " + i);
 
-			try {
-				socketinner = serverSocket.accept();
-				System.out.println("New connection made");
+			ObjectInputStream recievedHeroes = new ObjectInputStream(socket.getInputStream());
+			System.out.println("made it pass the read");
 
-				ObjectInputStream recievedHeroes = new ObjectInputStream(socket.getInputStream());
-				Object heroes =  recievedHeroes.readObject();
-				System.out.println("the sent heroe is " + heroes.toString());
-					
-					
-							
+			Object hero=  recievedHeroes.readObject();
+			System.out.println("the sent hero is " + hero.toString());
 
 
+		//	new HeroHandler(i, socket).start();
+			i++;
 
 
 
-
-			} catch(Exception e) {
-				socket.close();
-				serverSocket.close();
-				e.printStackTrace();
-
-			}
 		}
 	}
 }
