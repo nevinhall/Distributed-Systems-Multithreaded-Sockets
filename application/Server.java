@@ -24,13 +24,7 @@ public class Server {
 
 		// Create a server socket
 
-		try {
-			serverSocket = new ServerSocket(8003);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("Server started ");
+
 
 
 
@@ -41,11 +35,12 @@ public class Server {
 		ServerObservable checkForVillians =  new ServerObservable();
 		ServerObserver retriveVillians = new ServerObserver();
 		serverClientArrayList arrayOfVillians =  new serverClientArrayList();
-		ArrayList<Object> readyVillains;
+		ArrayList<Object> readyVillains = null;
 
 
-		Socket socket = null;
-		socket = serverSocket.accept();
+
+
+
 
 		retriveVillians.setTemp(temp);
 		retriveVillians.setSendVillains(arrayOfVillians);
@@ -57,38 +52,54 @@ public class Server {
 		System.out.println("shouldbe delted by now");
 
 
-		readyVillains = arrayOfVillians.getFoundVillains();
-		System.out.println("The villain array size should equal num villains it is, " + readyVillains.size());
 
-		ObjectOutputStream sendvillain= new ObjectOutputStream(socket.getOutputStream()); 
-		sendvillain.writeObject(readyVillains);
-		System.out.println("Sent Villains");
-		sendvillain.reset();
 		//sendvillain.close();
 
 
 
-		//socket.close();
-		
 
-		//loop to keep checking for clients wanting to join
-		int i = 1;
-		while(true) {
-		//	socket = serverSocket.accept();
-			System.out.println("Reconncted client No: " + i);
+		try {
+			serverSocket = new ServerSocket(7001);
 
-			ObjectInputStream recievedHeroes = new ObjectInputStream(socket.getInputStream());
-			System.out.println("made it pass the read");
+			System.out.println("Server started ");
 
-			Object hero=  recievedHeroes.readObject();
-			System.out.println("the sent hero is " + hero.toString());
+			//loop to keep checking for clients wanting to join
+			int i = 1;
+			boolean flag = true;
+
+			while(flag) {
+				Socket socket = serverSocket.accept();
+
+				System.out.println("Client connected no " + i);
+
+				if(i == 1){
+					readyVillains = arrayOfVillians.getFoundVillains();
+					System.out.println("The villain array size should equal num villains it is, " + readyVillains.size());
+
+					ObjectOutputStream sendvillain= new ObjectOutputStream(socket.getOutputStream()); 
+					sendvillain.writeObject(readyVillains);
+					System.out.println("Sent Villains");
+					sendvillain.reset();
+				}
 
 
-		//	new HeroHandler(i, socket).start();
-			i++;
+				if( i > 1) {
+					new HeroHandler(i, socket).start();
+				}
 
 
 
+				if(i == readyVillains.size() ) {
+					flag = false;
+				}
+				i++;
+
+			}
+
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }

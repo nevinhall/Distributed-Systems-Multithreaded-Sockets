@@ -5,6 +5,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import villians.Person;
+
 public class HeroClient {
 
 
@@ -13,40 +15,50 @@ public class HeroClient {
 		ArrayList<Object> recievedreadyVillains = null;
 		String host = "localhost";
 		Socket socket = null;
-		try {
-			// Establish connection with the server
-			socket = new Socket(host, 8003);
+//		try {
+//			// Establish connection with the server
+			socket = new Socket(host, 7001);
+//			System.out.println("connection with server made");
+//		}
+//		catch (IOException ex) {
+//			ex.printStackTrace();
+//		}
+		System.out.println("waiting for objects");
+		ObjectInputStream recievedVillains = new ObjectInputStream(socket.getInputStream());
 
-			ObjectInputStream recievedVillains = new ObjectInputStream(socket.getInputStream());
 
-
-			recievedreadyVillains = (ArrayList<Object>) recievedVillains.readObject();
-			System.out.println(recievedreadyVillains.get(0));
-			//recievedVillains.close();
-			//socket.close();
-
-		}
-		catch (IOException ex) {
-			ex.printStackTrace();
-		}
+		recievedreadyVillains = (ArrayList<Object>) recievedVillains.readObject();
+		System.out.println(recievedreadyVillains.get(0));
+		
+		socket.close();
 
 		//		Socket socketThreads = null;
 		//		
 		//		
 		//		socketThreads = new Socket(host, 7006);
-		 ReactID idVillains = new ReactID();
-		for(int i = 0; i < recievedreadyVillains.size(); i++ ){
-			Object villain = recievedreadyVillains.get(i);
-			SuperHero hero = idVillains.id(villain);
-			ObjectOutputStream sendHero = new ObjectOutputStream(socket.getOutputStream()); 
-			Thread.sleep(1000);
-			sendHero.writeObject(hero);
-			System.out.println("Sent Hero");
+		
+		ReactID idVillains = new ReactID();
+		for(int i = 0; i < recievedreadyVillains.size() ; i++ ){
+			socket = new Socket(host, 7001);
+			
 
-			//Object villain = recievedreadyVillains.get(i);
-			//sendHeroesThread t = new sendHeroesThread(socket,villain);
-			//			t.start();
-			//			t.sleep(10000);
+			Object villain = recievedreadyVillains.get(i);
+//			ObjectOutputStream sendHero = new ObjectOutputStream(keepSending.getOutputStream()); 
+//			SuperHero hero = idVillains.id(villain);
+//
+//			if( hero  == null) {
+//				Person itsAperson = new Person();
+//				sendHero.writeObject(itsAperson);
+//				
+//			}
+//
+//			Thread.sleep(1000);
+//			sendHero.writeObject(hero);
+//			System.out.println("Sent Hero");
+
+			sendHeroesThread t = new sendHeroesThread(socket,villain);
+						t.start();
+						t.sleep(10000);
 
 		}
 
