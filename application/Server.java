@@ -3,6 +3,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -24,7 +25,7 @@ public class Server {
 		// Create a server socket
 
 		try {
-			serverSocket = new ServerSocket(7003);
+			serverSocket = new ServerSocket(7006);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -64,7 +65,7 @@ public class Server {
 		System.out.println("Sent Villains");
 
 
-		socket.close();
+		//socket.close();
 
 		//loop to keep checking for clients wanting to join
 		while(true) {
@@ -74,7 +75,9 @@ public class Server {
 				socketinner = serverSocket.accept();
 				System.out.println("New connection made");
 
-					ObjectOutputStream recievedHero = new ObjectOutputStream(socketinner.getOutputStream()); 
+				ObjectInputStream recievedHeroes = new ObjectInputStream(socket.getInputStream());
+				Object heroes =  recievedHeroes.readObject();
+				System.out.println("the sent heroe is " + heroes.toString());
 					
 					
 							

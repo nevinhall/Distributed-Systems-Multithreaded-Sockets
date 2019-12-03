@@ -18,7 +18,7 @@ public class sendHeroesThread extends Thread{
 		try {
 		  SuperHero hero = idVillains.id(villain);
 			ObjectOutputStream sendHero = new ObjectOutputStream(socketThreads.getOutputStream()); 
-			sendHero.writeObject(sendHero);
+			sendHero.writeObject(hero);
 			System.out.println("Sent Hero");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

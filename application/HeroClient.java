@@ -14,7 +14,7 @@ public class HeroClient {
 		Socket socket = null;
 		try {
 			// Establish connection with the server
-			socket = new Socket(host, 7002);
+			socket = new Socket(host, 7006);
 
 			ObjectInputStream recievedVillains = new ObjectInputStream(socket.getInputStream());
 
@@ -27,14 +27,14 @@ public class HeroClient {
 			ex.printStackTrace();
 		}
 
-		Socket socketThreads = null;
-		
-		
-		socketThreads = new Socket(host, 7001);
+//		Socket socketThreads = null;
+//		
+//		
+//		socketThreads = new Socket(host, 7006);
 		
 		for(int i = 0; i < recievedreadyVillains.size(); i++ ){
 			Object villain = recievedreadyVillains.get(i);
-			new sendHeroesThread(socketThreads,villain).start();
+			new sendHeroesThread(socket,villain).start();
 			
 		}
 		
