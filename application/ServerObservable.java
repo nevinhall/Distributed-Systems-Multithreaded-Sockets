@@ -6,7 +6,6 @@ public class ServerObservable extends Observable {
 
 	public void tempFile(File fileDir) {
 
-		//loop doesnt work goes too far
 		Boolean exists = true;
 
 		while(exists == true){
@@ -15,12 +14,11 @@ public class ServerObservable extends Observable {
 			System.out.println("reached");
 			notifyObservers(fileDir);
 			exists = fileDir.exists() && fileDir.list().length != 1;
-			
+
 
 			if(fileDir.list().length == 1){
 				exists = false;
 				//have to also tell client to run
-
 
 			}
 

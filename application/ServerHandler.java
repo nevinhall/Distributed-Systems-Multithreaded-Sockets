@@ -26,9 +26,6 @@ public class ServerHandler extends Thread {
 				ObjectInputStream villansFromServer = new ObjectInputStream(serverSocket.getInputStream());
 				Object recievedVillain = villansFromServer.readObject();
 				villansFromServer.close();
-				
-			
-				
 
 				//Allows for a hero object to be created in response to the sent villain
 				ReactID createHero = new ReactID();

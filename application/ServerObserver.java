@@ -25,35 +25,16 @@ public class ServerObserver  implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 
-		//		foundVillains.add( temp.listFiles(new FilenameFilter() {
-		//			public boolean accept(File dir, String name) {
-		//				return name.startsWith("battle-zone-"+i) && name.endsWith("ser");
-		//			}
-		//		}));
-		//		
-
-
-
 		deleteVillain = new File("D://college 2019//College third year//semester one//Disturbted systems//common//battle-zone-" + i + ".ser");
 		System.out.println(i + " this is the current value");
 
-		//
-		//		System.out.println("Array size: " + foundVillains.size());
-		//		System.out.println("File to delete " + deleteVillain.getName());
-
-
-
-
 		try {
 			idTemp = new FileInputStream(deleteVillain);
-			
-			System.out.println("should be deleted");
-
 
 			ObjectInputStream in;
 
 			in = new ObjectInputStream(idTemp);
-			
+
 			objectFound = (Object)in.readObject();
 			sendVillains.add(objectFound, deleteVillain);
 			idTemp.close();
@@ -66,14 +47,11 @@ public class ServerObserver  implements Observer{
 		}
 
 		System.out.println("\n file contains " + objectFound.getClass());
-		
+
 
 		deleteVillain.delete();
-		
+
 		i++;
-
-
-
 
 	}
 
@@ -84,7 +62,7 @@ public class ServerObserver  implements Observer{
 	public void setTemp(File temp) {
 		this.temp = temp;
 	}
-	
+
 	public serverClientArrayList getSendVillains() {
 		return sendVillains;
 	}

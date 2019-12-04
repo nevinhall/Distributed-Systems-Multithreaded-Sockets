@@ -21,26 +21,12 @@ public class Server {
 	public Server() throws ClassNotFoundException, IOException {
 		ServerSocket serverSocket = null;
 
-
-		// Create a server socket
-
-
-
-
-
-
-
 		//create and configure observer/able
 		File temp = new File("D://college 2019//College third year//semester one//Disturbted systems//common//");
 		ServerObservable checkForVillians =  new ServerObservable();
 		ServerObserver retriveVillians = new ServerObserver();
 		serverClientArrayList arrayOfVillians =  new serverClientArrayList();
 		ArrayList<Object> readyVillains = null;
-
-
-
-
-
 
 		retriveVillians.setTemp(temp);
 		retriveVillians.setSendVillains(arrayOfVillians);
@@ -51,24 +37,17 @@ public class Server {
 
 		System.out.println("shouldbe delted by now");
 
-
-
-		//sendvillain.close();
-
-
-
-
 		try {
-			serverSocket = new ServerSocket(7001);
+			serverSocket = new ServerSocket(7008);
 
 			System.out.println("Server started ");
 
 			//loop to keep checking for clients wanting to join
 			int i = 1;
 			boolean flag = true;
-
+			Socket socket = null;
 			while(flag) {
-				Socket socket = serverSocket.accept();
+				 socket = serverSocket.accept();
 
 				System.out.println("Client connected no " + i);
 
@@ -93,7 +72,7 @@ public class Server {
 					flag = false;
 				}
 				i++;
-
+			
 			}
 
 
